@@ -24,7 +24,8 @@
         'S': 1
     };
 
-    var dvPattern = ['s', 'r', 'g', 'm', 'p', 'd', 'n', 'S'];
+    var dvPattern = ['s', 'r', 's', 'g', 'r', 'g', 'r', 'm',
+                     's', 'm', 'g', 'r', 's', 'r', 'g', 'm'];
 
     var elem = document.getElementById('play'),
             audioContext = new (window.AudioContext || window.webkitAudioContext),
@@ -48,14 +49,14 @@
         if (j < dvPattern.length) {
             setTimeout(printArohanam, playlength * 1000);
         } else {
-            y += 50;
-            setTimeout(printAvarohanam, playlength * 1000);
+            //y += 50;
+            //setTimeout(printAvarohanam, playlength * 1000);
         }
     }
 
     printArohanam();
 
-    function printAvarohanam() {
+    /*function printAvarohanam() {
         j--;
         x += 50;
         y = noteRelativeLocations[dvPattern[j]] * 50;
@@ -63,7 +64,7 @@
         if (j < dvPattern.length) {
             setTimeout(printAvarohanam, playlength * 1000);
         }
-    }
+    }*/
 
     function playArohanam() {
         for (var i = 0; i < dvPattern.length; i++) {
@@ -77,7 +78,7 @@
             osc.connect(audioContext.destination);
         }
 
-        for (var i = dvPattern.length - 1; i >= 0; i--) {
+        /*for (var i = dvPattern.length - 1; i >= 0; i--) {
             osc = audioContext.createOscillator();
             // 1 second divided by number of beats per second times number of beats (length of a note)
             osc.type = 'sine';
@@ -86,7 +87,7 @@
             osc.stop(t + playlength);
             t += playlength;
             osc.connect(audioContext.destination);
-        }
+        }*/
     }
 
     playArohanam();
