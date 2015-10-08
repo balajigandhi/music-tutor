@@ -45,7 +45,7 @@
     var myCanvas = document.getElementById("myCanvas");
     var ctx = myCanvas.getContext("2d");
     ctx.font = "20px Arial";
-    var x = 30, y = 450;
+    var x = 0, y = 0;
 
     var keys = Object.keys(arohanam);
     var j = 0;
@@ -54,10 +54,9 @@
     var j1 = 0;
 
     function printArohanam() {
-        console.log(pitchRelativeLocation[j]);
-        ctx.fillText(keys[j++], x, y);
         x += 50;
-        y -= 50;
+        y = pitchRelativeLocation[keys[j]] * 50;
+        ctx.fillText(keys[j++], x, y);
         if (j < keys.length) {
             setTimeout(printArohanam, playlength * 1000);
         } else {
@@ -69,9 +68,9 @@
     printArohanam();
 
     function printAvarohanam() {
-        ctx.fillText(keys1[j1++], x, y);
         x += 50;
-        y += 50;
+        y = pitchRelativeLocation[keys1[j1]] * 50;
+        ctx.fillText(keys1[j1++], x, y);
         if (j1 < keys1.length) {
             setTimeout(printAvarohanam, playlength * 1000);
         }
