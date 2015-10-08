@@ -1,0 +1,95 @@
+<html>
+<body>
+<canvas id="myCanvas" width="1024" height="480" style="border:1px solid #d3d3d3;"></canvas>
+<script type="text/javascript">
+    var arohanam = {
+        's': 261.63,
+        'r': 293.66,
+        'g': 329.63,
+        'm': 349.23,
+        'p': 392.00,
+        'd': 440.00,
+        'n': 493.88,
+        'S': 523.25
+    };
+
+    var avarohanam = {
+        'S': 523.25,
+        'n': 493.88,
+        'd': 440.00,
+        'p': 392.00,
+        'm': 349.23,
+        'g': 329.63,
+        'r': 293.66,
+        's': 261.63
+    };
+
+    var elem = document.getElementById('play'),
+            audioContext = new (window.AudioContext || window.webkitAudioContext),
+            osc = audioContext.createOscillator();
+    var bpm = 60;
+    var t = audioContext.currentTime;
+    var playlength = 0;//1 / (bpm / 60);
+
+    var myCanvas = document.getElementById("myCanvas");
+    var ctx = myCanvas.getContext("2d");
+    ctx.font = "20px Arial";
+    var x = 30, y = 450;
+
+    var keys = Object.keys(arohanam);
+    var j = 0;
+
+    var keys1 = Object.keys(avarohanam);
+    var j1 = 0;
+
+    function printArohanam() {
+        ctx.fillText(keys[j++], x, y);
+        x += 50;
+        y -= 50;
+        if (j < keys.length) {
+            setTimeout(printArohanam, playlength * 1000);
+        } else {
+            y += 50;
+            setTimeout(printAvarohanam, playlength * 1000);
+        }
+    }
+
+    printArohanam();
+
+    function printAvarohanam() {
+        ctx.fillText(keys1[j1++], x, y);
+        x += 50;
+        y += 50;
+        if (j1 < keys1.length) {
+            setTimeout(printAvarohanam, playlength * 1000);
+        }
+    }
+
+    function playArohanam() {
+        for (var i in arohanam) {
+            osc = audioContext.createOscillator();
+            // 1 second divided by number of beats per second times number of beats (length of a note)
+            osc.type = 'sine';
+            osc.frequency.value = arohanam[i];
+            osc.start(t);
+            osc.stop(t + playlength);
+            t += playlength;
+            osc.connect(audioContext.destination);
+        }
+        for (var i in avarohanam) {
+            osc = audioContext.createOscillator();
+            // 1 second divided by number of beats per second times number of beats (length of a note)
+            osc.type = 'sine';
+            osc.frequency.value = avarohanam[i];
+            osc.start(t);
+            osc.stop(t + playlength);
+            t += playlength;
+            osc.connect(audioContext.destination);
+        }
+    }
+
+    //playArohanam();
+</script>
+<div id="play"></div>
+</body>
+</html>
