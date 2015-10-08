@@ -2,7 +2,7 @@
 <body>
 <canvas id="myCanvas" width="1024" height="480" style="border:1px solid #d3d3d3;"></canvas>
 <script type="text/javascript">
-    var arohanam = {
+    var noteFrequencies = {
         's': 261.63,
         'r': 293.66,
         'g': 329.63,
@@ -13,18 +13,7 @@
         'S': 523.25
     };
 
-    var avarohanam = {
-        'S': 523.25,
-        'n': 493.88,
-        'd': 440.00,
-        'p': 392.00,
-        'm': 349.23,
-        'g': 329.63,
-        'r': 293.66,
-        's': 261.63
-    };
-
-    var pitchRelativeLocation = {
+    var noteRelativeLocations = {
         's': 8,
         'r': 7,
         'g': 6,
@@ -34,6 +23,8 @@
         'n': 2,
         'S': 1
     };
+
+    var dvPattern = ['s', 'r', 'g', 'm', 'p', 'd', 'n', 'S'];
 
     var elem = document.getElementById('play'),
             audioContext = new (window.AudioContext || window.webkitAudioContext),
@@ -47,17 +38,14 @@
     ctx.font = "20px Arial";
     var x = 0, y = 0;
 
-    var keys = Object.keys(arohanam);
     var j = 0;
-
-    var keys1 = Object.keys(avarohanam);
-    var j1 = 0;
 
     function printArohanam() {
         x += 50;
-        y = pitchRelativeLocation[keys[j]] * 50;
-        ctx.fillText(keys[j++], x, y);
-        if (j < keys.length) {
+        y = noteRelativeLocations[dvPattern[j]] * 50;
+        ctx.fillText(dvPattern[j], x, y);
+        j++;
+        if (j < dvPattern.length) {
             setTimeout(printArohanam, playlength * 1000);
         } else {
             y += 50;
@@ -68,30 +56,32 @@
     printArohanam();
 
     function printAvarohanam() {
+        j--;
         x += 50;
-        y = pitchRelativeLocation[keys1[j1]] * 50;
-        ctx.fillText(keys1[j1++], x, y);
-        if (j1 < keys1.length) {
+        y = noteRelativeLocations[dvPattern[j]] * 50;
+        ctx.fillText(dvPattern[j], x, y);
+        if (j < dvPattern.length) {
             setTimeout(printAvarohanam, playlength * 1000);
         }
     }
 
     function playArohanam() {
-        for (var i in arohanam) {
+        for (var i = 0; i < dvPattern.length; i++) {
             osc = audioContext.createOscillator();
             // 1 second divided by number of beats per second times number of beats (length of a note)
             osc.type = 'sine';
-            osc.frequency.value = arohanam[i];
+            osc.frequency.value = noteFrequencies[dvPattern[i]];
             osc.start(t);
             osc.stop(t + playlength);
             t += playlength;
             osc.connect(audioContext.destination);
         }
-        for (var i in avarohanam) {
+
+        for (var i = dvPattern.length - 1; i >= 0; i--) {
             osc = audioContext.createOscillator();
             // 1 second divided by number of beats per second times number of beats (length of a note)
             osc.type = 'sine';
-            osc.frequency.value = avarohanam[i];
+            osc.frequency.value = noteFrequencies[dvPattern[i]];
             osc.start(t);
             osc.stop(t + playlength);
             t += playlength;
