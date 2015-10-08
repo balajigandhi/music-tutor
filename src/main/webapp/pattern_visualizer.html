@@ -24,12 +24,23 @@
         's': 261.63
     };
 
+    var pitchRelativeLocation = {
+        's': 8,
+        'r': 7,
+        'g': 6,
+        'm': 5,
+        'p': 4,
+        'd': 3,
+        'n': 2,
+        'S': 1
+    };
+
     var elem = document.getElementById('play'),
             audioContext = new (window.AudioContext || window.webkitAudioContext),
             osc = audioContext.createOscillator();
     var bpm = 60;
     var t = audioContext.currentTime;
-    var playlength = 0;//1 / (bpm / 60);
+    var playlength = 1 / (bpm / 60);
 
     var myCanvas = document.getElementById("myCanvas");
     var ctx = myCanvas.getContext("2d");
@@ -43,6 +54,7 @@
     var j1 = 0;
 
     function printArohanam() {
+        console.log(pitchRelativeLocation[j]);
         ctx.fillText(keys[j++], x, y);
         x += 50;
         y -= 50;
@@ -88,7 +100,7 @@
         }
     }
 
-    //playArohanam();
+    playArohanam();
 </script>
 <div id="play"></div>
 </body>
