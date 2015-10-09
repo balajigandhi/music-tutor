@@ -41,8 +41,12 @@
     var myCanvas = document.getElementById("myCanvas");
     var ctx = myCanvas.getContext("2d");
     ctx.font = "20px Arial";
+    var cw = myCanvas.width;
+    var ch = myCanvas.height;
+    var vsplit = 16;
+    var hsplit = 8;
 
-    drawGrid(myCanvas);
+    drawGrid();
 
     printArohanam();
 

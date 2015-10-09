@@ -1,8 +1,4 @@
-function drawGrid(myCanvas) {
-    var cw = myCanvas.width;
-    var ch = myCanvas.height;
-    var vsplit = 16;
-    var hsplit = 8;
+function drawGrid() {
 
     for (var x = 0; x <= cw; x += cw / vsplit) {
         ctx.strokeStyle = 'lightgrey';

@@ -3,8 +3,8 @@ var x = 0, y = 0;
 var j = 0;
 
 function printArohanam() {
-    x += 50;
-    y = noteRelativeLocations[dvPattern[j]] * 50;
+    x += cw / vsplit;
+    y = noteRelativeLocations[dvPattern[j]] * ch / hsplit;
     ctx.fillText(dvPattern[j], x, y);
     j++;
     if (j < dvPattern.length) {
