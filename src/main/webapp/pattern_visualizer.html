@@ -2,6 +2,7 @@
 <head>
     <script type="text/javascript" src="grid_printer.js"></script>
     <script type="text/javascript" src="note_printer.js"></script>
+    <script type="text/javascript" src="note_player.js"></script>
 </head>
 <body>
 <canvas id="myCanvas" width="1024" height="480" style="border:1px solid #d3d3d3;"></canvas>
@@ -49,19 +50,6 @@
     drawGrid();
 
     printArohanam();
-
-    function playArohanam() {
-        for (var i = 0; i < dvPattern.length; i++) {
-            osc = audioContext.createOscillator();
-            // 1 second divided by number of beats per second times number of beats (length of a note)
-            osc.type = 'sine';
-            osc.frequency.value = noteFrequencies[dvPattern[i]];
-            osc.start(t);
-            osc.stop(t + playlength);
-            t += playlength;
-            osc.connect(audioContext.destination);
-        }
-    }
 
     playArohanam();
 </script>
