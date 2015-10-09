@@ -46,7 +46,7 @@
     var elem = document.getElementById('play'),
             audioContext = new (window.AudioContext || window.webkitAudioContext),
             osc = audioContext.createOscillator();
-    var bpm = 120;
+    var bpm = 240;
     var t = audioContext.currentTime;
     var playlength = 1 / (bpm / 60);
 
@@ -58,13 +58,16 @@
     var vsplit = 16;
     var hsplit = 8;
     var line = -1;
-
+    var isAvarohanam = false;
     drawGrid();
 
     function play() {
         line++;
-        printArohanam();
-        playArohanam();
+        if (line > 5) {
+            isAvarohanam = true;
+        }
+        printNotes();
+        playNotes();
         if (line < 4) {
             setTimeout(play, playlength * dvPattern1.length * 1000);
         }
