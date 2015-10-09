@@ -4,12 +4,12 @@ var j = 0;
 
 function printArohanam() {
     x += cw / vsplit;
-    y = noteRelativeLocations[dvPattern[j]] * ch / hsplit;
+    y = noteRelativeLocations[notes[dvPattern1[j]]] * ch / hsplit;
     var newX = x - cw / vsplit / 2 - 5;
     var newY = y - ch / hsplit / 2 + 5;
-    ctx.fillText(dvPattern[j], newX, newY);
+    ctx.fillText(notes[dvPattern1[j]], newX, newY);
     j++;
-    if (j < dvPattern.length) {
+    if (j < dvPattern1.length) {
         setTimeout(printArohanam, playlength * 1000);
     } else {
         setTimeout(clearGrid, playlength * 1000);
