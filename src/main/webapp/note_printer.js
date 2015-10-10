@@ -4,11 +4,11 @@ var j = 0;
 
 function printNotes() {
     x += cw / vsplit;
-    var noteNum = isAvarohanam ? 9 - dvPattern1[j] : dvPattern1[j];
-    y = noteRelativeLocations[notes[noteNum + line]] * ch / hsplit;
+    var notes = isAvarohanam ? avarohanam : arohanam;
+    y = noteRelativeLocations[notes[dvPattern1[j] + lineInc]] * ch / hsplit;
     var newX = x - cw / vsplit / 2 - 5;
     var newY = y - ch / hsplit / 2 + 5;
-    ctx.fillText(notes[noteNum + line], newX, newY);
+    ctx.fillText(notes[dvPattern1[j] + lineInc], newX, newY);
     j++;
     if (j < dvPattern1.length) {
         setTimeout(printNotes, playlength * 1000);

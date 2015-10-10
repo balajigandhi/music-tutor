@@ -29,7 +29,7 @@
         'S': 1
     };
 
-    var notes = {
+    var arohanam = {
         1: 's',
         2: 'r',
         3: 'g',
@@ -38,6 +38,17 @@
         6: 'd',
         7: 'n',
         8: 'S'
+    };
+
+    var avarohanam = {
+        1: 'S',
+        2: 'n',
+        3: 'd',
+        4: 'p',
+        5: 'm',
+        6: 'g',
+        7: 'r',
+        8: 's'
     };
 
     var dvPattern1 = [1, 2, 1, 3, 2, 3, 2, 4,
@@ -57,18 +68,21 @@
     var ch = myCanvas.height;
     var vsplit = 16;
     var hsplit = 8;
-    var line = -1;
+    var lineInc = -1;
+    var totalLines = 0;
     var isAvarohanam = false;
     drawGrid();
 
     function play() {
-        line++;
-        if (line > 5) {
+        lineInc++;
+        totalLines++;
+        if (lineInc > 4) {
             isAvarohanam = true;
+            lineInc = 0;
         }
         printNotes();
         playNotes();
-        if (line < 4) {
+        if (totalLines < 10) {
             setTimeout(play, playlength * dvPattern1.length * 1000);
         }
     }
