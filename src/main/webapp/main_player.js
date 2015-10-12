@@ -59,3 +59,17 @@ var hsplit = 8;
 var lineInc = -1;
 var totalLines = 0;
 var isAvarohanam = false;
+
+function play() {
+    lineInc++;
+    totalLines++;
+    if (lineInc > 4) {
+        isAvarohanam = true;
+        lineInc = 0;
+    }
+    printNotes();
+    playNotes();
+    if (totalLines < 10) {
+        setTimeout(play, playlength * dvPattern1.length * 1000);
+    }
+}
