@@ -73,3 +73,8 @@ function play() {
         setTimeout(play, playlength * dvPattern1.length * 1000);
     }
 }
+
+function playSV() {
+    printSVNotes();
+    playSVNotes();
+}

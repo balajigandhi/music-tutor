@@ -27,3 +27,20 @@ function clearGrid() {
         }
     }
 }
+
+function printSVNotes() {
+    x += cw / vsplit;
+    y = noteRelativeLocations[dvPattern[j]] * ch / hsplit;
+    var newX = x - cw / vsplit / 2 - 5;
+    var newY = y - ch / hsplit / 2 + 5;
+    ctx.fillText(dvPattern[j], newX, newY);
+    j++;
+    if (j < dvPattern.length) {
+        setTimeout(printSVNotes, playlength * 1000);
+    } else {
+        x = 0;
+        y = 0;
+        j = 0;
+        setTimeout(clearGrid, playlength * 500);
+    }
+}
